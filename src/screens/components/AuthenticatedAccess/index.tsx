@@ -1,6 +1,7 @@
 import { Fragment, FunctionComponent, ReactNode } from 'react';
 import { useAuth } from 'src/hooks/useAuth';
 import { AUTH_STATUS } from 'src/store/modules/auth/reducer';
+import { isMockEnabled } from 'src/configs/mockMode';
 import { UnitsListScreenLoading } from '../UnitsListScreenLoading';
 
 type AuthenticatedAccessProps = {
@@ -20,9 +21,10 @@ export const AuthenticatedAccess: FunctionComponent<AuthenticatedAccessProps> = 
   }
 
   if (authenticationStatus === AUTH_STATUS.UNAUTHENTICATED) {
-    // Em desenvolvimento, sem backend de autenticação, apenas exibe o conteúdo
-    // (o useAuth injeta um usuário fictício). Em produção mantém o redirect.
-    if (import.meta.env.DEV) {
+    // No modo demonstração (sem backend) apenas exibe o conteúdo, pois o useAuth
+    // injeta um usuário fictício. Quando há backend real em produção, mantém o
+    // redirect para o fluxo de autenticação.
+    if (isMockEnabled) {
       return <Fragment>{yes}</Fragment>;
     }
 

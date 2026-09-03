@@ -5,16 +5,17 @@ import type {
   PromotionData,
 } from 'src/store/modules/promotions/reducer';
 import type { Pagination } from 'src/types';
+import { isMockEnabled } from 'src/configs/mockMode';
 
 /**
- * Fake backend para MODO DE DESENVOLVIMENTO.
+ * Fake backend para MODO DE DEMONSTRAÇÃO (dev sem backend OU deploy sem
+ * VITE_BASE_URL configurado).
  *
- * Intercepta requisições axios e devolve respostas mockadas SEM rede, apenas
- * quando import.meta.env.DEV é true. Em produção (build) este módulo nunca é
- * carregado nem registrado.
+ * Intercepta requisições axios e devolve respostas mockadas SEM rede. Quando há
+ * backend real configurado em produção, este módulo não é registrado.
  *
  * Objetivo: permitir ver as telas do admin com dados de exemplo (cards de
- * unidade, etc.) sem depender do backend real.
+ * unidade, promoções, clientes, etc.) sem depender do backend real.
  */
 
 const baseCover = '/assets/back-office-get-in-cover.png';
@@ -335,7 +336,7 @@ function resolve(method: string = 'get', url: string = ''): { data?: unknown; st
 }
 
 export function enableDevMockBackend(client: AxiosInstance) {
-  if (!import.meta.env.DEV) return;
+  if (!isMockEnabled) return;
 
   client.interceptors.request.use((config: AxiosRequestConfig) => {
     // Ignora chamadas sem URL (ex.: axios() para refresh fora da instância api).
@@ -344,8 +345,8 @@ export function enableDevMockBackend(client: AxiosInstance) {
 
     const resolved = resolve(method, url);
 
-    // Log de debug (apenas em dev) para acompanhar quais chamadas o mock atende.
-    if (import.meta.env.DEV) {
+    // Log de debug para acompanhar quais chamadas o mock atende.
+    if (isMockEnabled) {
       // eslint-disable-next-line no-console
       console.debug(`[mock-backend] ${method.toUpperCase()} ${url} -> ${resolved.status}`);
     }
@@ -369,7 +370,7 @@ export function enableDevMockBackend(client: AxiosInstance) {
  * também o axios global (para chamadas avulsas que não usam a instância api).
  */
 export function enableDevMockClients(api: AxiosInstance) {
-  if (!import.meta.env.DEV) return;
+  if (!isMockEnabled) return;
 
   enableDevMockBackend(api);
   enableDevMockBackend(axios);

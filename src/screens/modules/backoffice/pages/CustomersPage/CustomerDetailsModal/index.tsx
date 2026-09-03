@@ -22,6 +22,7 @@ import {
 import { HistoryCard } from './HistoryCard';
 import { PromotionCard } from './PromotionCard';
 import { MOCK_PEOPLE_BY_UNIT, MOCK_PEOPLE_FALLBACK } from 'src/configs/devMockPeople';
+import { isMockEnabled } from 'src/configs/mockMode';
 import * as S from './styles';
 
 interface CustomerDetailsModalProps {
@@ -53,7 +54,7 @@ export function CustomerDetailsModal({
   const modalIsLoading = loading || isLoading;
 
   const peopleReservations =
-    import.meta.env.DEV && customer
+    isMockEnabled && customer
       ? MOCK_PEOPLE_BY_UNIT[customer.unit_id] ?? MOCK_PEOPLE_FALLBACK
       : [];
 
@@ -133,7 +134,7 @@ export function CustomerDetailsModal({
         </S.Details>
       </S.Header>
 
-      {import.meta.env.DEV && (
+      {isMockEnabled && (
         <S.People title="Clientes que reservaram">
           <S.TitleWrapper>
             <PriceTag3 size={18} />

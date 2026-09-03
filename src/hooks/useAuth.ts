@@ -5,6 +5,7 @@ import type { RootType } from 'src/store/modules/rootReducer';
 import { Creators as AuthCreators } from 'src/store/modules/auth/actions';
 import { type AuthStatusValues, AUTH_STATUS } from 'src/store/modules/auth/reducer';
 import { mockToken, mockUser } from 'src/configs/devMock';
+import { isMockEnabled } from 'src/configs/mockMode';
 
 type UseAuthResponse = {
   authenticationStatus: AuthStatusValues | null;
@@ -25,12 +26,12 @@ export const useAuth = (): UseAuthResponse => {
         accessToken = Cookies.get('access_token_ad');
 
         if (!accessToken) {
-          if (!import.meta.env.DEV) {
+          if (!isMockEnabled) {
             setAuthStatus(AUTH_STATUS.UNAUTHENTICATED);
             return;
           }
 
-          // ----- Modo de desenvolvimento (sem backend) -----
+          // ----- Modo demonstração (dev sem backend, ou deploy sem API) -----
           // Se já houver um usuário mock no store (persistido em sessão), apenas
           // marca como autenticado. Senão, injeta o usuário fictício direto no
           // estado (sem passar pelo saga, que dependeria de VITE_BASE_URL).
