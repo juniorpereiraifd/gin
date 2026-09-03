@@ -1,0 +1,14 @@
+# We use several templates to make it easier and always keep the integrations up to date.
+#
+# In this way, to better understand each job to be performed within the pipeline, visit https://code.getin.dev/get-in/devops/pipeline-templates
+
+.snyk-ignore-vulns:
+  script:
+    - snyk ignore --id='SNYK-JS-NTHCHECK-1586032'
+
+include:
+  - project: 'get-in/devops/pipeline-templates'
+    file:
+      - 'Getin/DevOps.yml'
+      - 'Snyk.yml'
+      - 'Vercel.yml'

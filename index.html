@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="pt-br" translate="no">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Get In - Dashboard" />
+    <link rel="apple-touch-icon" href="/favicon.ico" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="/manifest.json" />
+    <!--
+      Notice the use of  in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>Get In - Dashboard</title>
+    <!-- Heap Analytics -->
+    <script type="text/javascript">
+      (window.heapReadyCb = window.heapReadyCb || []),
+        (window.heap = window.heap || []),
+        (heap.load = function (e, t) {
+          (window.heap.envId = e),
+            (window.heap.clientConfig = t = t || {}),
+            (window.heap.clientConfig.shouldFetchServerConfig = !1);
+          var a = document.createElement('script');
+          (a.type = 'text/javascript'),
+            (a.async = !0),
+            (a.src = 'https://cdn.us.heap-api.com/config/' + e + '/heap_config.js');
+          var r = document.getElementsByTagName('script')[0];
+          r.parentNode.insertBefore(a, r);
+          var n = [
+              'init',
+              'startTracking',
+              'stopTracking',
+              'track',
+              'resetIdentity',
+              'identify',
+              'identifyHashed',
+              'getSessionId',
+              'getUserId',
+              'getIdentity',
+              'addUserProperties',
+              'addEventProperties',
+              'removeEventProperty',
+              'clearEventProperties',
+              'addAccountProperties',
+              'addAdapter',
+              'addTransformer',
+              'addTransformerFn',
+              'onReady',
+              'addPageviewProperties',
+              'removePageviewProperty',
+              'clearPageviewProperties',
+              'trackPageview',
+            ],
+            i = function (e) {
+              return function () {
+                var t = Array.prototype.slice.call(arguments, 0);
+                window.heapReadyCb.push({
+                  name: e,
+                  fn: function () {
+                    heap[e] && heap[e].apply(heap, t);
+                  },
+                });
+              };
+            };
+          for (var p = 0; p < n.length; p++) heap[n[p]] = i(n[p]);
+        });
+      heap.load('%VITE_HEAP_ID%');
+    </script>
+    <!-- End Heap Analytics -->
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-K7VZCLF');
+    </script>
+    <!-- End Google Tag Manager -->
+    <script>
+      (function (g, u, i, d, e, s) {
+        g[e] = g[e] || [];
+        var f = u.getElementsByTagName(i)[0];
+        var k = u.createElement(i);
+        k.async = true;
+        k.src = 'https://static.userguiding.com/media/user-guiding-' + s + '-embedded.js';
+        f.parentNode.insertBefore(k, f);
+        if (g[d]) return;
+        var ug = (g[d] = { q: [] });
+        ug.c = function (n) {
+          return function () {
+            ug.q.push([n, arguments]);
+          };
+        };
+        var m = ['previewGuide', 'finishPreview', 'track', 'identify', 'hideChecklist', 'launchChecklist'];
+        for (var j = 0; j < m.length; j += 1) {
+          ug[m[j]] = ug.c(m[j]);
+        }
+      })(window, document, 'script', 'userGuiding', 'userGuidingLayer', '3GO98613PBOID');
+    </script>
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-K7VZCLF"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+    <script type="module" src="/src/index.tsx"></script>
+  </body>
+</html>
