@@ -4,7 +4,7 @@ import { Creators as LayoutCreators } from 'src/store/modules/layout/actions';
 import { RootType } from 'src/store/modules/rootReducer';
 import { SideMenu as BaseSideMenu, ItemsProps } from 'src/stories/navigation/SideMenu';
 import { SideMenu } from 'src/screens/components/SideMenu';
-import { DollarSign, House, MonitorCog } from 'lucide-react';
+import { House, MonitorCog } from 'lucide-react';
 
 export const SideMenuOrganizationContent: FunctionComponent = () => {
   const dispatch = useDispatch();
@@ -41,23 +41,6 @@ export const SideMenuOrganizationContent: FunctionComponent = () => {
                   {
                     key: 'backoffice-get-in/crm/customers',
                     label: 'Clientes',
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            key: 'financial',
-            label: 'Financeiro',
-            icon: <DollarSign size={14} />,
-            children: [
-              {
-                key: 'sellers',
-                label: 'Vendedores',
-                children: [
-                  {
-                    key: 'financial/sellers/zoop',
-                    label: 'Zoop',
                   },
                 ],
               },

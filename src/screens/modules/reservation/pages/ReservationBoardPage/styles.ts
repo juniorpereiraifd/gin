@@ -8,6 +8,12 @@ export const PageHeading = styled.div`
   flex-wrap: wrap;
 `;
 
+export const PageHeadingLeft = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+`;
+
 export const RestaurantHeader = styled.div`
   display: flex;
   align-items: center;

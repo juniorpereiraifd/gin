@@ -330,6 +330,46 @@ function resolve(method: string = 'get', url: string = ''): { data?: unknown; st
     }
   }
 
+  // Settings do módulo Reservas. O saga getReservationSettings lê response.data[0]
+  // e o reducer do unity usa esse enabled para liberar/bloquear o módulo. Devolver
+  // enabled:true destrava o módulo Reservas no modo demonstração.
+  if (method.toLowerCase() === 'get' && /reservation\/v1\/units\/[^/]+\/settings$/.test(u)) {
+    const unitId = u.split('/').filter(Boolean).slice(-2)[0];
+
+    return {
+      status: 200,
+      data: {
+        data: [
+          {
+            id: 'res-settings-dev',
+            unit_id: unitId,
+            enabled: true,
+            tolerance: 15,
+            days_in_advance: 30,
+            overbook_allowed_for_agent: false,
+            billing_enabled: false,
+            billing_type: { pix: false, credit: false },
+            getin_tax: '0',
+            installments_enabled: false,
+            installments_max: 1,
+            google_reserve_enabled: false,
+            noshow_enabled: false,
+            noshow_hours_in_advance: 0,
+            noshow_getin_tax: 0,
+            notification_email: '',
+            notification_email_enabled: false,
+            nps_enabled: false,
+            seller_token: '',
+            additional_information: '',
+            conditions: '',
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+          },
+        ],
+      },
+    };
+  }
+
   // Qualquer endpoint não mapeado: responde 200 vazio genérico para não estourar
   // erros em telas cujo foco não é este mock. Pode ser ampliado sob demanda.
   return { status: 200, data: { data: [] } };

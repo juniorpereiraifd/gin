@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { Search } from '@styled-icons/evil/Search';
 import { Add } from '@styled-icons/ionicons-outline/Add';
+import { ArrowBack } from '@styled-icons/ionicons-outline/ArrowBack';
 import { RootType } from 'src/store/modules/rootReducer';
 import { PageTitle } from 'src/stories/typography/PageTitle';
 import { Title } from 'src/stories/typography';
@@ -11,7 +12,7 @@ import { Button } from 'src/stories/general/Button';
 import { Input } from 'src/stories/entry';
 import { PageContainer } from 'src/components/PageContainer';
 import { BoxContrasted } from 'src/components/BoxContrasted';
-import { createReservationId } from 'src/configs/devMockReservations';
+import { buildMockReservations, createReservationId } from 'src/configs/devMockReservations';
 import type {
   ReservationData,
   ReservationStatus,
@@ -32,11 +33,14 @@ const TAB_LABELS: Record<BoardTab, string> = {
 
 export function ReservationBoardPage() {
   const { unitId } = useParams<'unit'>();
+  const navigate = useNavigate();
   const {
     hall: { unity },
   } = useSelector((state: RootType) => state);
 
-  const [reservations, setReservations] = useState<ReservationData[]>([]);
+  const [reservations, setReservations] = useState<ReservationData[]>(
+    () => buildMockReservations()
+  );
   const [tab, setTab] = useState<BoardTab>('received');
   const [search, setSearch] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
@@ -62,7 +66,7 @@ export function ReservationBoardPage() {
 
   // Garante o reset do estado local quando troca de unidade.
   useEffect(() => {
-    setReservations([]);
+    setReservations(buildMockReservations());
     setTab('received');
     setSearch('');
   }, [unitId]);
@@ -110,7 +114,16 @@ export function ReservationBoardPage() {
   return (
     <PageContainer>
       <S.PageHeading>
-        <PageTitle>Reservas</PageTitle>
+        <S.PageHeadingLeft>
+          <Button
+            variant="outlined"
+            icon={<ArrowBack size={18} />}
+            onClick={() => navigate('/units')}
+          >
+            Voltar
+          </Button>
+          <PageTitle>Reservas</PageTitle>
+        </S.PageHeadingLeft>
 
         <S.RestaurantHeader>
           {unity?.profile_image && (

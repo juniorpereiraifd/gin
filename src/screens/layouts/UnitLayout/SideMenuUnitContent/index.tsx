@@ -3,15 +3,7 @@ import { Button, notification } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { Creators as LayoutCreators } from 'src/store/modules/layout/actions';
 import { Copy } from '@styled-icons/fluentui-system-regular/Copy';
-import { BarChartFill } from '@styled-icons/bootstrap/BarChartFill';
 import { CalendarToday } from '@styled-icons/material-outlined';
-import { PeopleOutline } from '@styled-icons/material-outlined/PeopleOutline';
-import { BookOpen } from '@styled-icons/boxicons-regular/BookOpen';
-import { Campaign } from '@styled-icons/material-outlined/Campaign';
-import { EmojiLaughing } from '@styled-icons/bootstrap/EmojiLaughing';
-import { Gift } from '@styled-icons/boxicons-regular/Gift';
-import { Store } from '@styled-icons/boxicons-regular/Store';
-import { UserCircle } from '@styled-icons/boxicons-regular/UserCircle';
 import ProfileCard from 'src/stories/general/ProfileCard';
 import { RootType } from 'src/store/modules/rootReducer';
 import { SideMenu as BaseSideMenu } from 'src/stories/navigation/SideMenu';
@@ -88,169 +80,12 @@ export const SideMenuUnitContent: FunctionComponent<SideMenuUnitContentProps> = 
   );
 };
 
+// Protótipo: o menu lateral de unidade exibe apenas "Reservas" (item único, sem
+// submenu), levando ao board de reservas. Demais módulos ficam ocultos.
 const items = [
   {
-    key: 'dashboard',
-    label: 'Relatórios',
-    icon: <BarChartFill size={14} />,
-    children: [
-      {
-        key: 'dashboard/flow',
-        label: 'Fluxo de clientes',
-      },
-      {
-        key: 'dashboard/sales',
-        label: 'Vendas',
-      },
-      {
-        key: 'dashboard/communication',
-        label: 'Comunicação',
-      },
-      {
-        key: 'dashboard/nps',
-        label: 'Avaliações',
-      },
-    ],
-  },
-  {
-    key: 'reservation',
+    key: 'reservation/board',
     label: 'Reservas',
     icon: <CalendarToday size={14} />,
-    children: [
-      {
-        key: 'reservation/halls',
-        label: 'Salões',
-      },
-      {
-        key: 'reservation/experiences',
-        label: 'Experiências',
-      },
-      {
-        key: 'reservation/transactions',
-        label: 'Transações',
-      },
-      {
-        key: 'reservation/special-dates',
-        label: 'Datas especiais',
-      },
-      {
-        key: 'reservation/blocks',
-        label: 'Bloqueios',
-      },
-      {
-        key: 'reservation/widgets',
-        label: 'Widget de reserva',
-      },
-      {
-        key: 'reservation/custom',
-        label: 'Personalizar formulário de reserva',
-      },
-      {
-        key: 'reservation/comunication',
-        label: 'Comunicação',
-      },
-      {
-        key: 'reservation/settings',
-        label: 'Ajustes',
-      },
-    ],
-  },
-  {
-    key: 'line',
-    label: 'Fila de espera',
-    icon: <PeopleOutline size={14} />,
-    children: [
-      {
-        key: 'line/comunication',
-        label: 'Comunicação',
-      },
-      {
-        key: 'line/settings',
-        label: 'Ajustes',
-      },
-    ],
-  },
-  {
-    key: 'menu',
-    label: 'Cardápios',
-    icon: <BookOpen size={14} />,
-    children: [
-      {
-        key: 'menus',
-        label: 'Meus cardápios',
-      },
-      {
-        key: 'menus/banners',
-        label: 'Banners',
-      },
-      {
-        key: 'menus/settings',
-        label: 'Ajustes',
-      },
-    ],
-  },
-  {
-    key: 'marketing',
-    label: 'Marketing',
-    icon: <Campaign size={14} />,
-    children: [
-      {
-        key: 'marketing/campaigns',
-        label: 'Campanhas',
-      },
-      {
-        key: 'marketing/customers',
-        label: 'Clientes',
-      },
-      {
-        key: 'marketing/settings',
-        label: 'Ajustes',
-        master: true,
-      },
-    ],
-  },
-  {
-    key: 'nps',
-    label: 'Avaliações',
-    icon: <EmojiLaughing size={14} />,
-    children: [
-      {
-        key: 'nps/personalization',
-        label: 'Personalizar',
-      },
-      {
-        key: 'nps/comunication',
-        label: 'Comunicação',
-      },
-    ],
-  },
-  {
-    key: 'voucher',
-    label: 'Giftback',
-    icon: <Gift size={14} />,
-    children: [
-      {
-        key: 'voucher/list',
-        label: 'Meus Giftbacks',
-      },
-      {
-        key: 'voucher/comunication',
-        label: 'Comunicação',
-      },
-      {
-        key: 'voucher/settings',
-        label: 'Ajustes',
-      },
-    ],
-  },
-  {
-    key: 'account',
-    label: 'Conta',
-    icon: <Store size={14} />,
-  },
-  {
-    key: 'users',
-    label: 'Usuários',
-    icon: <UserCircle size={14} />,
   },
 ];
