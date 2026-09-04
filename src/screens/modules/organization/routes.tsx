@@ -11,6 +11,7 @@ import { menuRoutes, MenuRoutesParams } from '../menu/routes';
 import { moduleRoutes, ModuleRoutesParams } from '../module/routes';
 import { npsRoutes, NpsRoutesParams } from '../nps/routes';
 import { reservationRoutes, ReservationRoutesParams } from '../reservation/routes';
+import { ReservationBoardPage } from '../reservation/pages/ReservationBoardPage';
 import { usersRoutes, UsersRoutesParams } from '../users/routes';
 import { voucherRoutes, VoucherRoutesParams } from '../voucher/routes';
 import { SellersPage } from './modules/Sellers/pages/SellersPage';
@@ -73,6 +74,15 @@ export const organizationRoutes: RouteObject[] = [
           isReadOnly: true,
         },
         children: [
+          // Board de reservas (protótipo mockado) — rota própria, fora do
+          // ModuleRouterControl para não depender do estado do módulo.
+          {
+            path: '/units/:unitId/reservation/board',
+            element: <ReservationBoardPage />,
+            handle: {
+              breadcrumb: 'Reservas',
+            },
+          },
           ...dashboardRoutes,
           ...reservationRoutes,
           ...lineRoutes,

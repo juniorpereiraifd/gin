@@ -152,7 +152,7 @@ export const HomePage = () => {
               href={
                 unity.status === statusSuspended && (user?.master ?? false) === false
                   ? undefined
-                  : `/units/${unity.id}/dashboard/flow`
+                  : `/units/${unity.id}/reservation/board`
               }
               onClick={() => {
                 if (unity.status === statusSuspended && (user?.master ?? false) === false) {
